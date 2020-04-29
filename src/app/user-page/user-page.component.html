@@ -1,0 +1,18 @@
+<div class="top-bar">
+
+    <div class="link-group">
+        <a class="link" routerLink="/user">Account</a>
+        <a class="link" routerLink="/user/empty">Empty</a>
+    </div>
+
+    <div class="greeting">
+        <span class="greeting-text">{{ 'Привет, ' + username + '!' }}</span>
+    </div>
+
+    <div class="log-out">
+        <a class="link link-log-out" href="#" (click)="logOut()">Выйти</a>
+    </div>
+
+</div>
+
+<router-outlet></router-outlet>

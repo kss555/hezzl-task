@@ -1,0 +1,38 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~normalize.css';
+@import "variables";
+
+* {
+    box-sizing: border-box;
+    letter-spacing: 0;
+    opacity: 1;
+    outline: 0 none;
+}
+
+html, body {
+    height: 100%;
+    font-family: $roboto-regular-medium;
+}
+
+.link {
+    font: $roboto-regular-large;
+    text-decoration: none;
+    margin-right: 20px;
+    color: $link;
+    cursor: pointer;
+
+    &:last-child {
+        margin-right: 0;
+    }
+}
+
+.link-active {
+    color: $link-active;
+}
+
+.link-log-out {
+    text-decoration: underline;
+    font: $roboto-regular-medium;
+    font-style: italic;
+}
+

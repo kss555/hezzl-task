@@ -1,0 +1,79 @@
+<div class="link-group">
+    <a class="link" routerLink="/sign-up" routerLinkActive="link-active">Регистрация</a>
+    <a class="link" routerLink="/log-in" routerLinkActive="link-active">Вход</a>
+</div>
+
+<form class="log-in-form" [formGroup]="form" (ngSubmit)="onSubmit(form.value, btnSubmit)">
+
+    <div class="input-group">
+
+        <!-- Name -->
+
+        <div *ngIf="isSignUp && showHintName" class="alert alert-info">Подсказка: Введите ваше имя</div>
+
+        <div *ngIf="isSignUp && name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+            <div *ngIf="name.errors.required">Обязательное поле</div>
+            <div *ngIf="name.errors.minlength">Имя должно состоять как минимум из 6 символов</div>
+        </div>
+
+        <div *ngIf="isSignUp" class="input-wrapper">
+            <label for="name">Имя</label>
+            <input #nameInput id="name" class="input-field" type="text" formControlName="name"
+                   [ngStyle]="getInputStyle(nameInput)"
+                   [ngClass]="{ 'input-disabled': loading }"
+                   (focus)="showHintName = true" (blur)="showHintName = false;">
+        </div>
+
+        <!-- Email -->
+
+        <div *ngIf="showHintEmail" class="alert alert-info">Подсказка: Введите ваш Email</div>
+
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+            <div *ngIf="email.errors.required">Обязательное поле</div>
+            <div *ngIf="email.errors.email || email.errors.pattern">Введите корректный Email вида example@example.com</div>
+        </div>
+
+        <div class="input-wrapper">
+            <label for="email">Email</label>
+            <input #emailInput id="email" class="input-field" type="text" formControlName="email"
+                   [ngStyle]="getInputStyle(emailInput)"
+                   [ngClass]="{ 'input-disabled': loading }"
+                   (focus)="showHintEmail = true" (blur)="showHintEmail = false;">
+        </div>
+
+        <!-- Password -->
+
+        <div *ngIf="showHintPassword" class="alert alert-info">Подсказка: Введите ваш пароль</div>
+
+        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+            <div *ngIf="password.errors.required">Обязательное поле</div>
+            <div *ngIf="password.errors.minlength || password.errors.pattern">Пароль должен состоять из 6 символов и заглавной буквы</div>
+        </div>
+
+        <div class="input-wrapper">
+            <label for="pass">Пароль</label>
+            <input #pwdInput id="pass" class="input-field" type="password" formControlName="password"
+                   [ngStyle]="getInputStyle(pwdInput)"
+                   [ngClass]="{ 'input-disabled': loading }"
+                   (focus)="showHintPassword = true" (blur)="showHintPassword = false;">
+            <span class="icon icon-eye">
+                <i class="ti ti-eye" (mousedown)="togglePassword(pwdInput)"></i>
+            </span>
+        </div>
+
+    </div>
+
+    <button #btnSubmit class="btn btn-submit" type="submit"
+            [ngClass]="{ 'btn-disabled': form.invalid }" [disabled]="form.invalid">
+
+        <span class="icon icon-loader" *ngIf="loading; else btnSubmitTextBlock">
+            <i class="ti ti-reload"></i>
+        </span>
+
+        <ng-template #btnSubmitTextBlock>
+            <span class="btn-text">{{ btnSubmitText }}</span>
+        </ng-template>
+
+    </button>
+
+</form>
